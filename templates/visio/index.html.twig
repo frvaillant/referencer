@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <div class="row maincolor headline">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons text-maincolor">remove_red_eye</i></a>
+        </div>
+        <div class="col s11">
+            <h5 class="main-title white-text">Visionneuse</h5>
+        </div>
+    </div>
+
+    <div class="row container" id="ref-container">
+        <object data="/pdf/references.pdf#toolbar=0" type="application/pdf" width="100%">
+            <embed src="/pdf/references.pdf#toolbar=0#toolbar=0" width="100%" />
+            </embed>
+        </object>
+    </div>
+
+
+{% endblock %}

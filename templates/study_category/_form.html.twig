@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    <label class="red-text">Nom de la catégorie</label>
+    {{ form_widget(form.name) }}
+    <button class="btn maincolor mgt20">{{ button_label|default('enregistrer') }}</button>
+{{ form_end(form) }}

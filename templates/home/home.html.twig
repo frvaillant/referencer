@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+    <div class="row maincolor headline" id="home">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">dashboard</i></a>
+        </div>
+        <div class="col s11">
+            <h5 class="main-title white-text">Tableau de bord</h5>
+        </div>
+    </div>
+    <div class="row container">
+        <div class="col s4 left-align">
+            <h4><i class="material-icons-outlined">settings</i> Configuration </h4>
+            <p class="col s11">
+                Pour pouvoir utiliser toutes les fonctionnalités de Referencer, vous devez renseigner quelques paramètres de configuration.
+            </p>
+            {% if config == true %}
+                <span class="chip red white-text">Application non configurée</span>
+            {% endif %}
+            <div class="col s11">
+                <a class="btn amber" href="{{ path('config') }}">Configurer</a>
+            </div>
+        </div>
+        <div class="col s4 left-align">
+            <h4><i class="material-icons-outlined">file_upload</i> Importation </h4>
+            <p class="col s11">
+                Vous pouvez importer toutes vos données déja existantes sous forme de tableaux excel.
+            </p>
+            <div class="col s11">
+                <a class="btn cyan" href="{{ path('config') }}">Importer</a>
+            </div>
+        </div>
+
+        <div class="col s4 left-align">
+            <h4><i class="material-icons-outlined">file_download</i> Exportation </h4>
+            <p class="col s11">
+                Vous pouvez télécharger toutes vos données sous forme de tableaux excel.
+            </p>
+            <div class="col s12">
+                <a class="btn pink submitter" href="#" id="downloader-excel">
+                    <i class="material-icons-outlined left">note_add</i> Générer
+                    <div class="progress black hide submit-loader" id="loader">
+                        <div class="indeterminate white"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row grey lighten-3">
+        <div class="row container">
+        <div class="col s4 left-align">
+            <p class="flow-text">
+                En résumé
+            </p>
+            <table class="striped resume">
+                <tr>
+                    <td>Références</td>
+                    <td>{{ count.study }}</td>
+                </tr>
+                <tr>
+                    <td>Catégories</td>
+                    <td>{{ count.category }}</td>
+                </tr>
+                <tr>
+                    <td>Types de projets</td>
+                    <td>{{ count.project }}</td>
+                </tr>
+                <tr>
+                    <td>Clients</td>
+                    <td>{{ count.client }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col s4 last-studies">
+            <p class="flow-text">Dernières références ajoutées</p>
+            <ul>
+                {% for reference in last_studies %}
+                    <li>
+                        <span class="reference-name">{{ reference.title }}</span>
+                        <span class="category-name">{{reference.category.name}}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <div class="col s4">
+            {% if hasReferenceFile %}
+                <p class="flow-text">Vous avez déja généré un dossier de références.</p>
+                <p>Le fichier date du {{ file_creation_date | date('d-m-Y') }} à {{ file_creation_date | date('H:i') }}</p>
+                <div class="row">
+                    <div class="col s6">
+                        <a href="/pdf/references.pdf" download="references.pdf" class="btn maincolor">
+                            <i class="material-icons left">file_download</i> Télécharger
+                        </a>
+                    </div>
+                    <div class="col s6">
+                        <a href="{{ path('references') }}" class="btn maincolor">
+                            <i class="material-icons left">loop</i> Générer
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    {% if config == false %}
+                    <div class="col s6">
+                        <a href="{{ path('send_email') }}" class="btn maincolor">
+                            <i class="material-icons left">mail</i> Transmettre
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="col s6">
+                        <a href="{{ path('visio') }}" class="btn maincolor">
+                            <i class="material-icons left">remove_red_eye</i> Visionner
+                        </a>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <div class="row container">
+
+    </div>
+
+    <div class="row container ">
+        <div class="col s8">
+            <p class="flow-text left-align mgt20">
+                Vos études
+            </p>
+            <div id="map"></div>
+        </div>
+        <div class="col s4">
+            <div class="col s12">
+                <p class="flow-text center-align">
+                    Graphiques
+                </p>
+            </div>
+            <div class="col s12 center-align">
+                <b class="left-align">
+                    Vos études par catégorie
+                </b>
+                <div class="col s12 left-align">
+                    {{ render_chart(chart) }}
+                </div>
+
+            </div>
+            <div class="col s12 center-align">
+                <b class=" left-align">
+                    Vos études par type de projet
+                </b>
+                <div class="col s12">
+                    {{ render_chart(chartp) }}
+                </div>
+            </div>
+            <div class="col s12 center-align">
+                <b class=" left-align">
+                    Vos études par client
+                </b>
+                <div class="col s12">
+                    {{ render_chart(chartc) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

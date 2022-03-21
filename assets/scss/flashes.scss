@@ -1,0 +1,24 @@
+.flashes {
+    position:absolute;
+    width:97vw;
+    margin-left:1vw;
+    top:60px;
+    z-index: 99999;
+
+    .flash {
+        border-radius: 4px;
+        padding: 10px 20px;
+        display: block;
+        margin-bottom:3px;
+        color:white;
+        font-weight:bold;
+        animation: fadeout 7.5s linear;
+
+        &.success {
+            background: #0f9d58;
+        }
+        &.error {
+            background: #bf360c;
+        }
+    }
+}

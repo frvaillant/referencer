@@ -1,0 +1,44 @@
+.table {
+    thead {
+        background: $main-color;
+        color:white;
+    }
+    tbody {
+        tr {
+            transition:all 0.3s ease-out;
+            &.even {
+                background: $main-color-lighter-2;
+            }
+            &:hover {
+                cursor:pointer;
+                background: $main-color-lighter-1;
+            }
+
+        }
+    }
+}
+
+
+.dataTables_wrapper {
+    .dataTables_paginate {
+        .paginate_button {
+            &.current {
+                border:1px solid transparent;
+                background: $main-color-lighter-1;
+                border-radius:0;
+                color: #FFF !important;
+                &:hover {
+                    background: $main-color;
+                    border:1px solid transparent;
+                    color: #FFF !important;
+                }
+            }
+            &:hover {
+                border:1px solid transparent;
+                background:$main-color;
+                border-radius:0;
+                color: #FFF;
+            }
+        }
+    }
+}

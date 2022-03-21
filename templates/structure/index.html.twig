@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Structure index{% endblock %}
+
+{% block body %}
+    <div class="row maincolor headline">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">home</i></a>
+        </div>
+        <div class="col s11">
+            <h5 class="main-title white-text">Votre structure</h5>
+        </div>
+
+    </div>
+    <div class="row container structure">
+        <div class="col s12 center-align">
+            <img src="{{ absolute_url(asset(structure.logo)) }}" width="300px"><br>
+            <h3 class="structure-title">{{ structure.title }}</h3>
+        </div>
+        <div class="col s3 offset-s2 right-align">
+            <p class="flow-text">
+                {{ structure.adress1 }}<br>
+                {% if structure.address2 %}{{ structure.address2 }}<br>{% endif %}
+                {% if structure.address3 %}{{ structure.address3 }}<br>{% endif %}
+                {{ structure.zipCode }} {{ structure.city }}<br>
+                {{ structure.phoneNumber1 }}{% if structure.phoneNumber2 %} - {{ structure.phoneNumber2 }}{% endif %}<br>
+                {{ structure.email }}<br>
+                {{ structure.siret }}
+            </p>
+            <p>
+                <a class="btn maincolor" href="{{ path('structure_edit', {'id': structure.id}) }}">modifier</a>
+            </p>
+        </div>
+        <div class="col s5 offset-s1 left-align">
+            {{structure.description | nl2br | raw }}
+        </div>
+    </div>
+
+{% endblock %}

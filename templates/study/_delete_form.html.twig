@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('study_delete', {'id': study.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette référence ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ study.id) }}">
+    <button class="btn red"><i class="material-icons-outlined left">delete</i> Supprimer</button>
+</form>

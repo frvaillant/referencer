@@ -1,0 +1,26 @@
+<container>
+    <row>
+            <p>
+                {{ message | raw }}
+            </p>
+    </row>
+    <row>
+     <p style="margin-top:50px;">
+         {% if logo %}
+            <img src="{{ email.image(logo) }}" alt="Logo" width="150px" style="margin-bottom: 10px;"><br>
+         {% endif %}
+         <b style="font-size:14px;">{{ structure.name }}</b><br>
+        {{ structure.adress1 }}<br>
+        {% if structure.address2 %}
+            {{ structure.address2 }}<br>
+        {% endif %}
+        {{ structure.zipCode }} {{ structure.city }}<br>
+        {{ structure.phoneNumber1 }}<br>
+        {% if structure.phoneNumber2 %}
+            {{ structure.phoneNumber2 }}
+        {% endif %}
+        {{ structure.email }}<br>
+
+        </p>
+    </row>
+</container>

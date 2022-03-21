@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client index{% endblock %}
+
+{% block body %}
+    <div class="row maincolor headline">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">settings</i></a>
+        </div>
+        <div class="col s11">
+            <h5 class="main-title white-text">Configuration</h5>
+        </div>
+    </div>
+    <div class="row container mgt20">
+        <div class="col s4" id="">
+                <p class="flow-text">
+                    Ce formulaire vous permet de définir la configuration de votre application afin de lui permettre de
+                    fonctionner correctement.<br>
+                </p>
+            <p>
+                <span class="chip">Configuration {% if isConfigComplete == false %}in{% endif %}complète {% if isConfigComplete %}
+                        <i class="material-icons-outlined close green-text">check</i>
+                {% else %}
+                        <i class="material-icons-outlined red-text close">cancel</i>
+                    {% endif %}
+                </span>
+            </p>
+            <p>
+                <span class="chip">Configuration mail{% if isMailConfigOk %}
+                    <i class="material-icons-outlined close green-text">check</i>
+                {% else %}
+                    incomplète
+                    <i class="material-icons-outlined close red-text">cancel</i>
+                    {% endif %}
+                </span>
+            </p>
+        </div>
+
+        <div class="col s6 offset-s2">
+            {{ form_start(form) }}
+            <div class="row">
+                <h5>Utilisation de l'API</h5>
+                <p>
+                    Si vous souhaitez afficher vos références sur votre site web depuis l'application, il faut que
+                    celui-ci soit autorisé à y accéder. Pour cela, merci de renseigner l'adresse IP de votre serveur
+                    web.
+                </p>
+                <label>IP de votre site web</label>
+                {{ form_widget(form.apiAuthorizedIp) }}
+            </div>
+            <div class="row">
+                <h5>Utilisation des Emails</h5>
+                {% if isMailConfigOk %}
+                    <p class="">
+                        <strong>Votre configuration a déja été définie correctement.</strong> Les informations saisies sont masquées pour plus de sécurité. Toute valeur saisie et enregistrée remplacera celle définie précédemment.<br>
+                    </p>
+                {% else %}
+                    <p>
+                        Pour envoyer des emails, vous devez fournir quelques informations. Nous vous conseillons de créer un
+                        compte Mailjet et de reporter ici les informations des paramètres SMTP de votre compte.
+                    </p>
+                {% endif %}
+                <div class="row">
+                    <div class="col s12">
+                        <label>Adresse mail de l'expéditeur</label>
+                        {{ form_widget(form.sender) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <label>Identifiant</label>
+                        {{ form_widget(form.login) }}
+                    </div>
+                    <div class="col s6">
+                        <label>Mot de passe</label>
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <label>Serveur SMTP</label>
+                        {{ form_widget(form.smtp) }}
+                    </div>
+                    <div class="col s4">
+                        <label>Port SMTP</label>
+                        {{ form_widget(form.port) }}
+                    </div>
+                    <div class="col s4">
+                        <label>Sécurité</label>
+                        {{ form_widget(form.encrypt) }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <button class="btn maincolor">Valider</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+main.loginpage {
+    background: url('../images/tournepierre.jpg') no-repeat center center;
+    background-size:cover;
+}
+
+.login-form {
+    margin-top:100px;
+    padding:40px !important;
+    border-radius:10px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0px 20px 35px;
+    form {
+        min-height: initial;
+        label {
+            background: none !important;
+            margin-top:-5px;
+        }
+        input::placeholder {
+            color:#999;
+        }
+    }
+}
+.mgr10 {
+    margin-right:10px;
+}

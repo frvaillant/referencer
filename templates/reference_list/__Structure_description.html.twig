@@ -1,0 +1,22 @@
+    <div class="row ref-desc" style="padding-top:30px !important;">
+        <div class="row headline-equi">
+            <div class="col s12 center-align">
+                <img src="{{ absolute_url(asset(structure.logo)) }}" alt="" width="200px">
+            </div>
+            <div class="col s12 center-align">
+                <h2>{{ structure.name }}</h2>
+                <h5>{{ structure.title }}</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s8 offset-s2" style="padding-top:80px !important;">
+                <p>
+                    {{ structure.description | nl2br | raw }}
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>

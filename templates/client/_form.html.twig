@@ -1,0 +1,59 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="row">
+        <div class="col s6">
+            <label class="red-text" for="">Nom</label>
+            {{ form_widget(form.name) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6">
+            <label class="red-text" for="">Adresse</label>
+            {{ form_widget(form.address1) }}
+        </div>
+        <div class="col s6">
+            <label for="">complément</label>
+            {{ form_widget(form.address2) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label class="red-text" for="">Code postal</label>
+            {{ form_widget(form.zipCode) }}
+        </div>
+        <div class="col s6">
+            <label class="red-text" for="">Ville</label>
+            {{ form_widget(form.city) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label for="">Téléphone</label>
+            {{ form_widget(form.phoneNumber1) }}
+        </div>
+        <div class="col s6">
+            <label class="red-text" for="">Téléphone</label>
+            {{ form_widget(form.phoneNumber2) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label class="red-text" for="">Email</label>
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="col s6">
+            <label>
+                {{ form_widget(form.hide) }}
+                <span>Toujours masquer ce client dans les dossiers générés</span>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 mgt20">
+            <button class="btn maincolor white-text">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

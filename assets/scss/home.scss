@@ -1,0 +1,43 @@
+.ref-count {
+    font-size: 2rem;
+    display:inline-block;
+    padding:10px 20px;
+    background: $main-color;
+    border-radius:5px;
+}
+
+.last-studies {
+    ul {
+        li {
+            margin-bottom: 10px;
+            width: 85%;
+            list-style: disc;
+            span {
+                &.reference-name {
+                    display:block;
+                    font-weight: bold;
+                }
+                &.category-name {
+                    font-weight: 300 !important;
+                    font-size: 0.8rem !important;
+                }
+            }
+        }
+    }
+}
+
+
+table {
+    &.resume {
+        width:80%;
+        font-size:1.1rem;
+        tr {
+            td {
+                padding: 8px 5px;
+                &:nth-child(2) {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

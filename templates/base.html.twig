@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Dossier de références{% endblock %}</title>
+
+            {% block stylesheets %}
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+                {{ encore_entry_link_tags('app') }}
+            {% endblock %}
+    </head>
+    <body class="">
+    <header>
+    {% if app.request.attributes.get('_route') != 'app_login' %}
+        {% block nav %}
+        <nav id="main-nav">
+            <div class="nav-wrapper white">
+
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="{{ path('home_base') }}" class="nav-link board"><i class="material-icons-outlined">dashboard</i></a></li>
+                        <li><a href="{{ path('structure_index') }}" class="nav-link you"><i class="material-icons-outlined">home</i></a></li>
+                        <li><a href="{{ path('home') }}" class="nav-link ref"><i class="material-icons-outlined">inventory</i></a></li>
+                        <li><a href="{{ path('study_category_index') }}" class="nav-link cat"><i class="material-icons-outlined">reorder</i></a></li>
+                        <li><a href="{{ path('sub_category_index') }}" class="nav-link subcat"><i class="material-icons-outlined">segment</i></a></li>
+                        <li><a href="{{ path('project_index') }}" class="nav-link proj"><i class="material-icons-outlined">view_in_ar</i></a></li>
+                        <li><a href="{{ path('equipment_index') }}" class="nav-link equ"><i class="material-icons-outlined">biotech</i></a></li>
+                        <li><a href="{{ path('client_index') }}" class="nav-link clients"><i class="material-icons-outlined">people</i></a></li>
+                        <li><a href="{{ path('references') }}" class="nav-link pdf"><i class="material-icons-outlined">auto_stories</i></a></li>
+                        <li><a href="{{ path('app_logout') }}" class="nav-link logout"><i class="material-icons">lock_open</i></a></li>
+                    </ul>
+            </div>
+        </nav>
+        {% endblock %}
+    {% endif %}
+    </header>
+    <div class="flashes">
+        {% set flashnum = 1 %}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash {{ label }}" id="flash{{ flashnum }}">
+                    <div class="message">
+                        {{ message }}
+                        <a href="#" class="flash-closer secondary-content right" data-target="flash{{ flashnum }}">
+                            <i class="material-icons white-text">close</i>
+                        </a>
+                    </div>
+                </div>
+                {% set flashnum = flashnum + 1 %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <main class="{% if app.request.attributes.get('_route') == 'app_login' %}loginpage{% endif %}">
+        {% block body %}
+        {% endblock %}
+    </main>
+    {% block footer %}
+    <footer>
+        {% if app.request.attributes.get('_route') != 'app_login' %}
+        {{ render(controller('App\\Controller\\FooterController::footer')) }}
+        {% else %}
+        {{ render(controller('App\\Controller\\FooterController::footerLogin')) }}
+        {% endif %}
+    </footer>
+    {% endblock %}
+           {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+    </body>
+</html>

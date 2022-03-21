@@ -1,0 +1,59 @@
+    <div class="row ref-equi"  style="padding-top:30px !important;">
+
+        <div class="row headline-equi">
+            <div class="col s12 center-align">
+                <img src="{{ absolute_url(asset(structure.logo)) }}" alt="" width="200px">
+            </div>
+            <div class="col s12 center-align">
+                <h2>NOS ÉQUIPEMENTS</h2>
+            </div>
+        </div>
+
+
+        <div class="row center-align">
+            <div class="col s12 keywords-row center-align">
+                <table class="striped equipments">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Marque
+                            </th>
+                            <th>
+                                Modèle
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Quantité
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for equipment in equipments %}
+                        <tr>
+                            <td>
+                                {{ equipment.name }}
+                            </td>
+                            <td>
+                                {{ equipment.brand }}
+                            </td>
+                            <td>
+                                {{ equipment.model }}
+                            </td>
+                            <td>
+                                {{ equipment.description }}
+                            </td>
+                            <td>
+                                {{ equipment.quantity }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

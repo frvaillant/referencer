@@ -1,0 +1,36 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="row">
+        <div class="col s12">
+            <label for="" class="red-text">Nom</label>
+            {{ form_widget(form.name) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label for="">Marque</label>
+            {{ form_widget(form.brand) }}
+        </div>
+        <div class="col s6">
+            <label for="">Modèle</label>
+            {{ form_widget(form.model) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <label for="">Description</label>
+            {{ form_widget(form.description) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <label for="">Quantité</label>
+            {{ form_widget(form.quantity) }}
+        </div>
+        <div class="col s6 mgt20">
+            <button class="btn maincolor">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    </div>
+
+{{ form_end(form) }}

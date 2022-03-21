@@ -1,0 +1,85 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="input-field col s6">
+        <label>Nom de votre société</label>
+        {{ form_widget(form.name) }}
+    </div>
+    <div class="input-field col s6">
+        <label>Signature</label>
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="input-field col s12">
+        <b>Votre logo</b><br>
+        {{ form_widget(form.imageFile) }}
+    </div>
+    <div class="input-field col s2">
+       {% if structure.logo %}
+           <img src="{{ absolute_url(asset(structure.logo)) }}" width="80px">
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="input-field col s4">
+        <label>Adresse</label>
+        {{ form_widget(form.adress1) }}
+    </div>
+    <div class="input-field col s4">
+        <label>Adresse 2</label>
+        {{ form_widget(form.address2) }}
+    </div>
+    <div class="input-field col s4">
+        <label>Adresse 3</label>
+        {{ form_widget(form.address3) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s4">
+        <label>Code postal</label>
+        {{ form_widget(form.zipCode) }}
+    </div>
+    <div class="input-field col s4">
+        <label>Ville</label>
+        {{ form_widget(form.city) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s4">
+        <label>Emaill</label>
+        {{ form_widget(form.email) }}
+    </div>
+    <div class="input-field col s4">
+        <label>Téléphone 1</label>
+        {{ form_widget(form.phoneNumber1) }}
+    </div>
+    <div class="input-field col s4">
+        <label>Téléphone 2</label>
+        {{ form_widget(form.phoneNumber2) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s4">
+        <label>Site web</label>
+        {{ form_widget(form.website) }}
+    </div>
+    <div class="input-field col s4">
+        <label>N° SIRET</label>
+        {{ form_widget(form.siret) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col s8">
+        <label>Description</label>
+        {{ form_widget(form.description) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <button class="btn maincolor">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

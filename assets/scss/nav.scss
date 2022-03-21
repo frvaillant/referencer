@@ -1,0 +1,89 @@
+header {
+    nav {
+        height: 40px;
+        line-height: 40px;
+        position:fixed;
+        z-index:9999;
+        .nav-wrapper {
+            padding: 0 5%;
+            ul {
+                li {
+                    a {
+                        border-radius: 0;
+                        color: #666666 !important;
+                        &:hover {
+                            background: $main-color;
+                            color: #fff !important;
+                        }
+
+                        &.active {
+                            background: $main-color;
+                            color: #fff !important;
+                        }
+
+                        i {
+                            height: 40px !important;
+                            line-height: 40px !important;
+                            display: block;
+                            padding: 0 10px;
+                            vertical-align: middle;
+                            text-align: center;
+                        }
+
+                        &.nav-link {
+                            position:relative;
+                            &.board:hover::after {
+                                content:'Tableau de bord';
+                            }
+                            &.you:hover::after {
+                                content:'Votre structure';
+                            }
+                            &.ref:hover::after {
+                                content:'Vos références';
+                            }
+                            &.cat:hover::after {
+                                content:'Catégories';
+                            }
+                            &.subcat:hover::after {
+                                content:'Sous catégories';
+                            }
+                            &.proj:hover::after {
+                                content:'Types de projets';
+                            }
+                            &.clients:hover::after {
+                                content:'Vos clients';
+                            }
+                            &.pdf:hover::after {
+                                content:'Générer un dossier';
+                            }
+                            &.logout:hover::after {
+                                content:'Se déconnecter';
+                            }
+                            &.equ:hover::after {
+                                content:'Votre équipement';
+                            }
+                            &:hover {
+                                &::after {
+                                    display:block;
+                                    position:absolute;
+                                    background:$main-color;
+                                    top:100%;
+                                    left:50%;
+                                    margin-left:-75px;
+                                    width:150px;
+                                    text-align: center;
+                                    color:white;
+                                    line-height: 30px;
+                                    height:30px;
+                                    margin-top:12px;
+                                    z-index: 99999;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

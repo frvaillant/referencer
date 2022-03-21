@@ -1,0 +1,77 @@
+{% for star in stars %}
+    <div class="row ref-star">
+
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <h1>{{ star.title }}</h1>
+            </div>
+        </div>
+
+        {% if star.keywords %}
+        <div class="row center-align">
+            <div class="col s12 keywords-row center-align">
+                {% for keyword in star.keywords %} <span class="">{{ keyword }}</span> {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if star.logo %}
+        <div class="row">
+            <div class="col s8 offset-s2 center-align">
+                <img src="{{ app.request.schemeAndHttpHost ~ app.request.baseUrl }}/{{ star.logo }}" width="100%;">
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col s4 center-align">
+                <strong>Type de projet</strong><br>
+                {{ star.project.name }}
+            </div>
+
+            <div class="col s4 center-align">
+                <strong>Catégorie d'études</strong><br>
+                {{ star.category.name }}
+            </div>
+
+            <div class="col s4 center-align">
+                <strong>Type d'intervention</strong><br>
+                {% if star.subCategories %}
+                    {% for subCategory in star.subCategories %}
+                        <span class="">{{ subCategory.name }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <p class="flow-text">
+                    {{ star.description | nl2br | raw }}
+                </p>
+            </div>
+        </div>
+        {% if star.logo2 %}
+            <div class="row">
+                <div class="col s8 offset-s2 center-align">
+                    <img src="{{ app.request.schemeAndHttpHost ~ app.request.baseUrl }}/{{ star.logo2 }}" width="100%;">
+                </div>
+            </div>
+        {% endif %}
+
+        {% if star.additionalDescription %}
+        <div class="row mgt20">
+            <div class="col s8 offset-s2">
+                <p class="flow-text">
+                    {{ star.additionalDescription | nl2br | raw }}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+    <div class="page-break"></div>
+{% endfor %}

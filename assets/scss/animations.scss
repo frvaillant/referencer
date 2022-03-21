@@ -1,0 +1,43 @@
+@keyframes loop {
+    0% {
+        transform:rotate(0);
+    }
+    50% {
+        transform:rotate(180deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+.loop {
+    animation : loop 1s infinite linear;
+}
+@keyframes inv-loop {
+    0% {
+        transform:rotate(0);
+    }
+    50% {
+        transform:rotate(-180deg);
+    }
+    100% {
+        transform: rotate(-359deg);
+    }
+}
+
+.inv-loop {
+    animation : inv-loop 1s infinite linear;
+}
+
+
+@keyframes fadeout {
+    0% {
+        opacity:1;
+    }
+    70% {
+        opacity:1;
+    }
+    100% {
+       opacity:0;
+    }
+}

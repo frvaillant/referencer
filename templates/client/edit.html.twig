@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Client{% endblock %}
+
+{% block body %}
+    <div class="row maincolor headline">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">people</i></a>
+        </div>
+        <div class="col s7">
+            <h5 class="main-title white-text">Vos clients</h5>
+        </div>
+        <div class="col s4 right-align">
+            <a href="{{ path('client_index') }}" class="btn white text-maincolor"><i class="material-icons left">chevron_left</i> retour</a>
+        </div>
+    </div>
+<div class="container mgt20">
+    <div class="row">
+        <div class="col s12">
+            {{ include('client/_form.html.twig', {'button_label': 'enregistrer'}) }}
+        </div>
+    </div>
+    <div class="row">
+
+            {{ include('client/_delete_form.html.twig') }}
+    </div>
+</div>
+
+{% endblock %}

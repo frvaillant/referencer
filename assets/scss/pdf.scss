@@ -1,0 +1,202 @@
+.page-break{
+    display: block;
+    clear: both;
+    page-break-after:always;
+}
+body {
+    margin:0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+span.pdf-success {
+    font-size: 1.2rem;
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 20px;
+    background: $main-color;
+    line-height: 35px;
+    padding: 7px;
+    width: 75vw;
+    i {
+        line-height: 35px;
+    }
+}
+
+.page-header {
+    display: block;
+    width:100%;
+    text-align: left;
+    font-size:0.8rem;
+    position: running(header);
+}
+
+.pdf-page {
+    width:100%;
+    position:relative;
+    padding-top:250px;
+    font-weight: normal;
+
+    .pdf-cover {
+        display:block;
+        width:100%;
+
+        .logo-container {
+            img {
+                width:400px;
+            }
+        }
+
+        h1 {
+            font-size:3rem;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            display:inline-block;
+            padding:7px 10px 7px 10px;
+            border-top:2px solid #000;
+            border-bottom:2px solid #000;
+            margin-top:50px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-family: 'Roboto', sans-serif;
+            font-style: italic !important;
+        }
+    }
+
+
+    .pdf-footer {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 0.9rem;
+        position:absolute;
+        width:100%;
+        bottom:30px;
+    }
+}
+
+.list-references {
+    h3 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+    }
+
+    .category-name {
+        display:block;
+        padding:30px 0 30px 0;
+        color:#999;
+    }
+
+    .reference-block {
+        padding-top:20px;
+        page-break-inside: avoid !important;
+
+        .study-title {
+            padding:0 !important;
+            margin:0;
+        }
+        .subcategories {
+            font-size: 0.9rem;
+            margin-bottom:5px;
+            span {
+                border-radius: 100px;
+                margin-left:-10px;
+                padding:4px 10px;
+                background: #eee;
+            }
+        }
+
+        .ref-title {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1.3rem;
+            color:$main-color;
+        }
+
+        .client-name {
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        span.ref-date {
+            background: $main-color;
+            color: #fff;
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 100px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8rem;
+        }
+        p {
+            &.description {
+                padding-left: 30px;
+                font-size: 0.9rem;
+                font-family: 'Roboto', sans-serif;
+                margin: 5px 0 0 0;
+            }
+        }
+    }
+}
+
+
+.ref-star {
+    .ref-image {
+        position:absolute;
+        top:0;
+        left:0;
+        width: 100vw;
+        height: 40vh;
+        background-size: cover;
+        display: block;
+    }
+}
+
+.keywords-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    span {
+        padding:7px 15px;
+        border-radius: 100px;
+        background:#ccc;
+    }
+}
+
+#map {
+    width:100%;
+    height:600px;
+}
+.row {
+    &.headline-equi {
+        margin-top: 100px !important;
+    }
+}
+
+table {
+    &.equipments {
+        thead {
+            tr {
+                border-bottom: 1px solid #666;
+            }
+        }
+        tbody {
+            tr {
+                &:not(:last-child) {
+                    border-bottom: 1px solid #666;
+                }
+            }
+        }
+    }
+}
+

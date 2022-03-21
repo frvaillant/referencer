@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StudyCategory{% endblock %}
+
+{% block body %}
+<div class="row maincolor headline">
+    <div class="col s1">
+        <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">reorder</i></a>
+    </div>
+    <div class="col s7">
+        <h5 class="main-title white-text">Catégories</h5>
+    </div>
+    <div class="col s4 right-align">
+        <a href="{{ path('study_category_index') }}" class="btn right white text-maincolor"><i class="material-icons left">chevron_left</i> retour</a>
+    </div>
+</div>
+<div class="container mgt20">
+    <div class="row">
+        <div class="col s12">
+            {{ include('study_category/_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

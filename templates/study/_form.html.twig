@@ -1,0 +1,176 @@
+{{ form_start(form, {'attr': {'id': 'form_study'}}) }}
+<div class="row">
+    <div class="col s6">
+        <div class="row">
+            <div class="col s12">
+                <label for="" class="required">Titre</label>
+                {{ form_widget(form.title) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="required">Catégorie</label>
+                {{ form_widget(form.category) }}
+            </div>
+        </div>
+        <div class="row" id="subCatZone">
+                <div class="col s12">
+                    <label class="">Précisez éventuellement</label>
+                    {{ form_widget(form.sub_categories) }}
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="required">Type de projet</label>
+                {{ form_widget(form.project) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="required">Client</label>
+                {{ form_widget(form.client) }}
+            </div>
+            <div class="col s12">
+                <label>
+                    {{ form_widget(form.hideClient) }}
+                    <span>Masquer le client de cette étude dans les dossiers</span>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="">Maître d'ouvrage</label>
+                {{ form_widget(form.projectManager) }}
+            </div>
+            <div class="col s12">
+                <label>
+                    {{ form_widget(form.hideProjectManager) }}
+                    <span>Masquer le maître d'ouvrage dans les dossiers</span>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="active required">Commune</label>
+                {{ form_widget(form.cityName) }}
+                <span class="small hide text-maincolor" id="cityOK"><i class="material-icons text-maincolor left small">check</i> Ville vérifiée avec succès</span>
+            </div>
+            <div class="col s12">
+                <label>
+                    {{ form_widget(form.hideCity) }}
+                    <span>Masquer la ville dans les dossiers (seul le département sera affiché)</span>
+                </label>
+            </div>
+        </div>
+        <div class="row maincolor-lighten-2 hide" id="cityPrecision">
+            <div class="col s12">
+                Merci de préciser la ville
+
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <div class="row">
+            <div class="col s12">
+                <label class="active required">Date de début</label>
+                {{ form_widget(form.startDate) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="active">Date de fin</label>
+                {{ form_widget(form.endDate) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label class="active required">Ajoutez une description</label>
+                {{ form_widget(form.description) }}
+            </div>
+            <div class="col s12">
+                Une description complémentaire peut être ajoutée. Elle aparaitra dans les études "mises en avant" dans les dossiers de référence.
+                <div>
+                    <label class="active">Ajoutez une description complémentaire</label>
+                    {{ form_widget(form.additionalDescription) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p class="smalltext">
+                    Vous pouvez charger des images au format <b>jpg ou png</b> d'une taille de <b>8Mo maximum</b>. Les images dont une des dimensions dépasse <b>2000px</b> seront redimensionnées automatiquement.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            {% if study.logo %}
+            <div class="col s3 study-image-zone" id="pic1">
+                <a class="btn-floating btn-small red white-text remove-img" data-study="{{ study.id }}" data-parent="1"><i class="material-icons-outlined">close</i></a>
+                <a class="btn-floating btn-small maincolor white-text show-image" data-file="{{ absolute_url(asset(study.logo)) }}"><i class="material-icons-outlined">remove_red_eye</i></a>
+
+                <img src="{{ absolute_url(asset(study.logo)) }}" width="100%">
+            </div>
+            {% endif %}
+            <div class="col s9">
+                <span> {% if study.logo %}Modifier l'image{% else %}Ajoutez une image{% endif %}</span><br>
+                {{ form_widget(form.imageFile) }}
+            </div>
+        </div>
+        <div class="row">
+            {% if study.logo2 %}
+            <div class="col s3 mgt20 study-image-zone" id="pic2">
+                <a class="btn-floating btn-small red white-text remove-img" data-study="{{ study.id }}" data-parent="2"><i class="material-icons-outlined">close</i></a>
+                <a class="btn-floating btn-small maincolor white-text show-image" data-file="{{ absolute_url(asset(study.logo2)) }}"><i class="material-icons-outlined">remove_red_eye</i></a>
+
+                <img src="{{ absolute_url(asset(study.logo2)) }}" width="100%">
+            </div>
+            {% endif %}
+            <div class="col s9 mgt20">
+                <span> {% if study.logo %}Modifier l'image{% else %}Ajoutez une image{% endif %}</span><br>
+                {{ form_widget(form.imageFile2) }}
+                <p><span class="smalltext">Cette image apparaitra dans les études "mises en avant"</span></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 input-field">
+                <label class="active">Mots clés (<b>séparés et validés par une virgule</b>)</label>
+                {{ form_widget(form.keywords) }}
+            </div>
+            <div>
+                <input type="hidden" name="list-keywords-added" id="list-keywords-added"
+                {% if study.keywords %} value="{{ study.keywords|join(',') }}" {% endif %}/>
+            </div>
+            <div class="col s12" id="keywords-list">
+                {% if study.keywords %}
+                    {% for keyword in study.keywords %}
+                        <div class="chip" data-keyword="{{ keyword }}">
+                            {{ keyword }}
+                            <a href="#" class="remover btn-floating btn-small"><i class="material-icons">close</i></a>
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mgt20 left-align">
+            <div class="col s5 offset-s1">
+                <button class="btn maincolor mgt20">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+            <div class="col s6">
+                <br>
+                <div class="progress grey lighten-2 hide" id="formloader">
+                    <div class="indeterminate black"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+
+<script>
+    window.addEventListener("beforeunload", function (event) {
+        document.getElementById('formloader').classList.remove('hide')
+    });
+</script>

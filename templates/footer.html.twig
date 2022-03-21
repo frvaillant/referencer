@@ -1,0 +1,30 @@
+<footer class="page-footer maincolor">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">{{ structure.name }}</h5>
+                <p class="white-text">
+                    {{ structure.adress1 }}<br>
+                    {{ structure.zipCode }} {{ structure.city }}<br>
+                    {{ structure.phoneNumber1 }}<br>
+                    {{ structure.email }}
+                </p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Web</h5>
+                <ul>
+                    <li>
+                        <a href="{{ structure.website }}" target="_blank" class="white-text">{{ structure.website }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-last black">
+        <div class="container">
+            © 2020 François VAILLANT
+            <a class="grey-text text-lighten-4 right" href="#!">Referencer 1.0</a>
+        </div>
+    </div>
+</footer>

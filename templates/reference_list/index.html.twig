@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Générer un dossier de références{% endblock %}
+
+{% block body %}
+    <div class="row maincolor headline" xmlns="http://www.w3.org/1999/html">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">auto_stories</i></a>
+        </div>
+        <div class="col s11">
+            <h5 class="main-title white-text">Générer un dossier de références</h5>
+        </div>
+    </div>
+
+    <form>
+        <div class="container">
+
+            <div class="row" id="pdf-generate-zone">
+                <div class="col s4" id="pdf-form">
+                    <div class="row">
+                        <label>Trier par</label>
+                        <select id="sort-list">
+                            <option value="{{ path('reference_list_cat_pdf') }}">catégorie</option>
+                            <option value="{{ path('reference_list_year_pdf') }}">Année</option>
+                            <option value="{{ path('reference_list_project_pdf') }}">type de projet</option>
+                            <option value="{{ path('reference_list_client_pdf') }}">Client</option>
+                        </select>
+                    </div>
+                    <div class="row input-field">
+                        <label for="">Mettre en avant une ou plusieurs études</label>
+                        <input type="text" id="list-studies" class="autocomplete">
+                        <input type="hidden" id="list-input">
+
+                        <div id="list-studies">
+                            <ul id="choice-list">
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <label>Uniquement les études plus récente que le</label>
+                        <input type="date" name="ref-date" id="ref-date">
+                    </div>
+                    <div class="row">
+                        <label>
+                            <input type="checkbox" class="filled-in toexclude" id="exclude-desc" checked>
+                            <span>Inclure les descriptions</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filled-in toexclude" id="exclude-cat" checked>
+                            <span>Inclure les catégories</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" class="filled-in toexclude" id="exclude-client" checked>
+                            <span>Inclure les clients</span>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="col s4 offset-s1">
+                    <div class="row">
+                        <h5><i class="material-icons-outlined left">note_add</i> Ajouter des pages</h5>
+                    </div>
+                    <div class="row">
+                        {% if okformap %}
+
+                            <label>
+                                <input type="checkbox" class="filled-in toexclude" id="include-stat">
+                                <span>Ajouter la carte et les graphiques</span>
+                            </label><br>
+                            <p class="small">Cette page doit être générée avant de construire un dossier.<br>
+                                Pour la générer, cliquez sur le bouton et patientez quelques secondes ...</p>
+                        {% endif %}
+                        <a href="{{ path('test_map') }}"
+                           class="btn maincolor"> {% if okformap %}Rég{% else %}G{% endif %}énérer la page carte et
+                            graphiques</a>
+                    </div>
+                    <div class="row mgt20">
+                        <label>
+                            <input type="checkbox" class="filled-in toexclude" id="include-equ">
+                            <span>Ajouter la page des equipements</span>
+                        </label><br>
+                    </div>
+                </div>
+
+                <div class="col s2 offset-s1 pdt30" id="btn-zone">
+                    <a class="btn btn-large maincolor submitter" id="submitter">
+                        Générer
+                        <div class="progress maincolor hide" id="loader">
+                            <div class="indeterminate white"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let data = []
+            const autocompleteList = document.getElementById('list-studies');
+            const autocompleteInstance = M.Autocomplete.init(autocompleteList, {
+                onAutocomplete: function (txt) {
+                    const ref = txt.split('- ref:');
+                    const idref = parseInt(ref[1]);
+                    if (data.indexOf(idref) === -1) {
+                        const newChild = '<li data-target="' + idref + '">' + ref[0] + '</li>';
+                        document.getElementById('choice-list').innerHTML += newChild;
+                        data[data.length] = idref;
+                        document.getElementById('list-input').value = data;
+                        document.getElementById('list-studies').value = '';
+                        return;
+                    }
+                    M.toast({html: 'Cette référence est déja dans votre liste', classe: 'red'})
+                }
+            });
+            autocompleteInstance.updateData({
+                {% for study in studies %}
+                "{{ study.title }} - ref:{{ study.id }}": null,
+                {% endfor %}
+            });
+
+        });
+    </script>
+{% endblock %}

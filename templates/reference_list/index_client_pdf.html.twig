@@ -1,0 +1,72 @@
+{% extends 'base_pdf.html.twig' %}
+
+{% block title %}Dossier de référence{% endblock %}
+
+{% block body %}
+    <div class="container list-references">
+        {% if stat %}
+            {% include('test_map/map_and_graph.html.twig') %}
+        {% endif %}
+
+        {% if stars %}
+            {% include('reference_list/__stars.html.twig') %}
+        {% endif %}
+
+        {% set client = null %}
+        {% for reference in references %}
+            {% if reference.hideClient == false %}
+                {% if client != reference.client %}
+                    {% if loop.index != 1 %}
+                        <div class="page-break"></div>
+                    {% endif %}
+                    <div class="row category-name center-align">
+                        <h3>{{ reference.client.name}}</h3>
+                        {% set client = reference.client %}
+                    </div>
+                {% endif %}
+                <div class="reference-block">
+                    <div class="row study-title">
+                        <div class="col s6">
+                            <span class="ref-title">{{ reference.title }}</span>
+                        </div>
+                        <div class="col s6 right-align">
+                           <span class="ref-date">
+                                {% if reference.city %}
+                                    {{ reference.city.cityName }} ({{ reference.city.zipCode |  slice(0,2)}}) -
+                                {% endif %}
+                               {{ reference.startDate | date('Y') }}
+                            </span>
+                        </div>
+                    </div>
+                    {% if show_cats == true %}
+                        <div class="row subcategories">
+                            <div class="col s12">
+                                <span class="ref-subcategory">{{ reference.category.name }}
+                                    {% if reference.subCategories %}
+                                        {% for subCategory in reference.subCategories %}
+                                           - {{ subCategory.name }}
+                                        {% endfor %}
+                                    {% endif %}
+                                    - {{ reference.project.name }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        {% if show_desc == true %}
+                            <div class="col s12">
+                                <p class="description">
+                                    {{ reference.description }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="page-break"></div>
+
+        {% if equipments %}
+            {% include('reference_list/__equipments.html.twig') %}
+        {% endif %}
+    </div>
+{% endblock %}

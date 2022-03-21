@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipment index{% endblock %}
+
+{% block body %}
+    <div class="row maincolor headline">
+        <div class="col s1">
+            <a class="btn-floating white mgr10"><i class="material-icons-outlined text-maincolor">biotech</i></a>
+        </div>
+        <div class="col s7">
+            <h5 class="main-title white-text">Votre équipement</h5>
+        </div>
+        <div class="col s4 right-align">
+            <a href="{{ path('equipment_new') }}" class="btn white text-maincolor"><i class="material-icons left">add</i> Ajouter</a>
+        </div>
+    </div>
+    <div class="row container mgt20">
+        <div class="col s12" id="equipment">
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#equipment').initDataTables({{ datatable_settings(datatable) }}, {
+                drawCallback: function(settings) {
+                    var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+                    pagination.toggle(this.api().page.info().pages > 1);
+                },
+                language: {
+                    processing: "Traitement en cours...",
+                    search: "Rechercher&nbsp;:",
+                    lengthMenu: "Afficher _MENU_ ",
+                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix: "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first: "Premier",
+                        previous: "Pr&eacute;c&eacute;dent",
+                        next: "Suivant",
+                        last: "Dernier"
+                    },
+                    aria: {
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                },
+                searching: true,
+                dom: 'lTfgtpi',
+                rowId: 'refId',
+                rowClass: 'ref-row'
+            }).then(function(dt) {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems);
+
+                dt.on('click', 'tbody tr', function() {
+                    document.location.href = '/equipment/' + $(this).attr('id') + '/edit'
+                })
+            });
+        });
+    </script>
+{% endblock %}

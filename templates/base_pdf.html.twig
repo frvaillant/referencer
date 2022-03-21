@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300&display=swap"
+              rel="stylesheet">
+        {% for path in encore_entry_css_files('app') %}
+            <link rel="stylesheet" href="{{ absolute_url(asset(path)) }}">
+        {% endfor %}
+    {% endblock %}
+    <title>{% block title %}Dossier de référence{% endblock %}</title>
+
+</head>
+<body>
+
+{% block cover %}
+    <div class="pdf-page">
+        <div class="pdf-cover">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align logo-container">
+                        <img src="{{ absolute_url(asset(structure.logo)) }}">
+                    </div>
+                    <div class="col s8 offset-s2 center-align">
+                        <h3>{{ structure.title }}</h3>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col s8 offset-s2 center-align">
+                        <h2 id="ref-title">Dossier de références</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pdf-footer center-align">
+            <strong>{{ structure.name }} - {{ structure.adress1 }} - {{ structure.zipCode }}
+                - {{ structure.city }}</strong><br>
+            {{ structure.phoneNumber1 }} - {{ structure.email }}<br>
+            {{ structure.siret }}
+        </div>
+        <div class="page-break"></div>
+    </div>
+{% endblock %}
+
+{% block description %}
+    {% include('reference_list/__Structure_description.html.twig') %}
+    <div class="page-break"></div>
+{% endblock %}
+
+{% block body %}{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% for file in encore_entry_js_files('app') %}
+    <script src="{{ absolute_url(asset(file)) }}"></script>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>
